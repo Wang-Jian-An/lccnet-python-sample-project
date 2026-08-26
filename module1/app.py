@@ -1,14 +1,6 @@
 import os
 from typing import List, Dict
 import streamlit as st
-from dotenv import load_dotenv
-
-# ==========================================
-# 1. 環境變數 (.env) 管理
-# ==========================================
-load_dotenv()
-APP_ENV: str = os.getenv("APP_ENV", "development")
-
 
 # ==========================================
 # 2. OOP 核心：基礎類別與繼承 (AWS, Azure, GCP)
@@ -98,7 +90,6 @@ class SimpleFinOpsManager:
 st.set_page_config(page_title="初學者 FinOps 雲端成本管理系統", layout="wide")
 
 st.title("☁️ 雲端 FinOps 簡單成本優化系統")
-st.caption(f"目前運行環境：`{APP_ENV}` | 適合 Python 模組一專案實作")
 
 # 初始化 Session State 保持資料狀態
 if "manager" not in st.session_state:
