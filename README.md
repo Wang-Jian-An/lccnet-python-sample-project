@@ -1,9 +1,9 @@
 # lccnet-python-sample-project
 
-## Sesson1. Python 核心語法與後端架構基本功
+## Session1. Python 核心語法與後端架構基本功
 
 
-## Sesson2. 網路爬蟲工程 —— 打造 Agent 的即時感測器
+## Session2. 網路爬蟲工程 —— 打造 Agent 的即時感測器
 
 ### Functional Requirements
 
@@ -18,7 +18,7 @@
 - Due to anti-scraping mechanisms, minimize interactions that trigger a full page re-render.
 - Minimize the frequency of connection between service and database
 
-### Hign-Level Design
+### High-Level Design
 
 ```mermaid
 flowchart TD
@@ -123,4 +123,46 @@ flowchart TD
 6. Select on region and get all of price tables
 
 #### AWS
+
+### Project Structure
+
+```
+module2/
+├── shared/
+│   ├── utility.py          # BrowserPool、@open_playwright_page 裝飾器、close_playwright()
+│   ├── mongo.py            # MongoDB 連線與 raw_html_snapshots 寫入（待實作）
+│   └── db.py               # PostgreSQL 連線與 Batch Upsert（待實作）
+├── automation/
+│   ├── compute-azure.py    # Azure VM 定價爬蟲
+│   ├── compute-gcp.py      # GCP Compute 定價爬蟲
+│   └── compute-aws.py      # AWS EC2 定價爬蟲（待實作）
+└── db/
+    └── 01_create_table.sql # 結構化資料庫 Schema 定義
+```
+
+### Environment Setup
+
+**Dependencies**
+
+| Package | Version |
+|---|---|
+| `playwright` | 1.62.0 |
+| `beautifulsoup4` | 4.14.2 |
+| `lxml` | 6.0.2 |
+| `nest_asyncio` | 1.6.0 |
+
+```bash
+pip install playwright==1.62.0 beautifulsoup4==4.14.2 lxml==6.0.2 nest_asyncio==1.6.0
+
+# 安裝 Chromium（Playwright 需要）
+playwright install chromium
+```
+
+**Run Scrapers**
+
+```bash
+# 從專案根目錄執行
+python -m module2.automation.compute-azure
+python -m module2.automation.compute-gcp
+```
 
